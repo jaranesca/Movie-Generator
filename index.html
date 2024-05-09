@@ -23,7 +23,7 @@
         </div>
         <button class="btn btn-success" onclick="randomMovieRecommendation()">Get Random Recommendation</button>
         <div class="mt-4" id="movieInfo">
-            <!-- Movie title and image will be displayed here -->
+            <!-- Movie title, reason, and image will be displayed here -->
         </div>
     </div>
 
@@ -56,7 +56,7 @@
             const dropdownMenu = document.getElementById('movieDropdown');
             favoriteMovies.forEach(movie => {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = `<a class="dropdown-item" href="#" onclick="showMovie('${movie.movieTitle}', '${movie.movieUrl}')">${movie.movieTitle}</a>`;
+                listItem.innerHTML = `<a class="dropdown-item" href="#" onclick="showMovie('${movie.movieTitle}', '${movie.movieUrl}', '${movie.reason}')">${movie.movieTitle}</a>`;
                 dropdownMenu.appendChild(listItem);
             });
         }
@@ -65,14 +65,15 @@
         function randomMovieRecommendation() {
             const randomIndex = Math.floor(Math.random() * favoriteMovies.length);
             const randomMovie = favoriteMovies[randomIndex];
-            showMovie(randomMovie.movieTitle, randomMovie.movieUrl);
+            showMovie(randomMovie.movieTitle, randomMovie.movieUrl, randomMovie.reason);
         }
 
         // Function to display selected movie information
-        function showMovie(title, imageUrl) {
+        function showMovie(title, imageUrl, reason) {
             const movieInfoDiv = document.getElementById('movieInfo');
             movieInfoDiv.innerHTML = `
                 <h3>${title}</h3>
+                <p><strong>Reason:</strong> ${reason}</p>
                 <img src="${imageUrl}" alt="${title}" style="max-width: 100%;">
             `;
         }
